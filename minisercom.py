@@ -9,6 +9,12 @@ import serial
 import sys
 import time
 
+try:
+    port = sys.argv[1]
+except IndexError as e:
+    print e, ". argument /dev/ttyUSB not existing"
+    sys.exit(1)
+
 
 def read(ser):
     while ser.isOpen:
@@ -18,20 +24,15 @@ def read(ser):
             continue
         yield line
 
-try:
-    port = sys.argv[1]
-except IndexError as e:
-    print e, ". argument /dev/ttyUSB not existing"
-    sys.exit(1)
 
-try:
-    ser = serial.Serial(port, 115200, timeout=1)
-except serial.serialutil.SerialException as e:
-    print e
-    sys.exit(1)
+if __name__ == '__main__':
+    try:
+        ser = serial.Serial(port, 115200, timeout=1)
+    except serial.serialutil.SerialException as e:
+        print e
+        sys.exit(1)
  
-
-with ser:
-    for line in read(ser):
-        print line
+    with ser:
+        for line in read(ser):
+            print line
 
