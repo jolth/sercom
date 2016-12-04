@@ -12,7 +12,7 @@ import time
 try:
     port = sys.argv[1]
 except IndexError as e:
-    print e, ". argument /dev/ttyUSB not existing"
+    print("{0}. argument /dev/ttyUSB not existing".format(e))
     sys.exit(1)
 
 
@@ -29,10 +29,10 @@ if __name__ == '__main__':
     try:
         ser = serial.Serial(port, 115200, timeout=1)
     except serial.serialutil.SerialException as e:
-        print e
+        print(e)
         sys.exit(1)
  
     with ser:
         for line in read(ser):
-            print line
+            print(line)
 
