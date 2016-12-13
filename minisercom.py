@@ -5,6 +5,8 @@
 #
 # default: 115200,8,N,1
 # usage: secom /dev/ttyUSB0 [script_file]
+# script_file should not have comments or blank lines
+#
 import serial
 import sys
 import time
@@ -61,4 +63,3 @@ if __name__ == '__main__':
         for line in read(ser):
             print(line.decode(), end='')
             #print(line)
-
