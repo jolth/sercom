@@ -2,4 +2,4 @@
 serial connection RS232
 
 ## required
-´pip install pyserial´
+`pip install pyserial`
