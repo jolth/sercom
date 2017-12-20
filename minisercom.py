@@ -11,6 +11,7 @@ import serial
 import sys
 import time
 
+
 try:
     port = sys.argv[1]
 except IndexError as e:
@@ -28,6 +29,7 @@ def read_Confile(f):
 def write_Confile(ser):
     while ser.isOpen:
         line = (yield)
+        time.sleep(1)  # build async
         ser.write(line)
 
 
@@ -54,12 +56,14 @@ if __name__ == '__main__':
         for line in read_cf:
             write_cf.send(line)
         print("File is loaded successfully")
- 
+
     with ser:
-        settings = ("{0}:{1}".format(k,v) for k,v in
-                ser.get_settings().items())
-        for s in settings: print(s, end='\t')
-        else: print(end='\n\n')
+        settings = ("{0}:{1}".format(k, v) for k, v in
+                    ser.get_settings().items())
+        for s in settings:
+            print(s, end='\t')
+        else:
+            print(end='\n\n')
         for line in read(ser):
             print(line.decode(), end='')
-            #print(line)
+            # print(line)
