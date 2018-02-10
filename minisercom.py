@@ -7,9 +7,9 @@
 # usage: secom /dev/ttyUSB0 [script_file]
 # script_file should not have comments or blank lines
 #
-import serial
-import sys
 import time
+import sys
+import serial
 
 
 try:
